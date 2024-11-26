@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Ararahistory
+{% endblock %}
+
+{% block content %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.tabs');
+      var instances = M.Tabs.init(elems);
+    });
+</script>
+
+ {% include "navbar.html" %}
+ {% include "inicio.html" %}
+ {% include "articles.html" %}
+
+{% endblock %}

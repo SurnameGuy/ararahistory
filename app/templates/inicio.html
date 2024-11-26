@@ -1,0 +1,150 @@
+{% load static %}
+<section id="inicio" style="background-color:#eaff8d; width:100%; height: 100%; padding:10px">
+  <style>
+    #iframeDiv {
+      position: absolute;
+      width: 540px;
+      height: 640px;
+      overflow: hidden;
+    }
+
+    #iframeDivParent {
+      width: fit-content !important;
+      height: fit-content !important;
+    }
+
+    .mapaDecoracao {
+      border: hidden;
+      border-radius: 15px;
+    }
+
+    #mapa {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 540px;
+      height: 480px;
+    }
+
+    #iframeBar {
+      width: 100%;
+      height: 50px;
+      background-color: blue;
+      position: relative;
+      z-index: 999999;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        color: white;
+        font-size: 18px;
+        margin-left: 15px
+      }
+
+    }
+
+    .mapaResponsivo {
+      height: 640px;
+      width: 540px;
+      margin-top: 15px
+    }
+
+    #mapaPlaceholder {
+      background-image: url("{% static 'img/map.png' %}");
+      background-size: cover;
+      /* Zoom to fit */
+      background-position: center;
+      /* Center the image */
+      width: 100%;
+      height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      position: absolute;
+      z-index: 1;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      opacity: 1;
+      /* Fully visible */
+      transition: opacity 1s ease;
+      /* Transition effect for fading */
+    }
+
+    #mapaPlaceholder.hidden {
+      opacity: 0;
+      /* Hidden state */
+    }
+
+    #mapParagraph {
+      display: flex;
+      flex-direction: row;
+    }
+  </style>
+
+  <div>
+    <p>Conheça a história da cidade de Araraquara e suas tradições.</p>
+    {% include "carroussel.html" %}
+    <!-- <div class="waves-effect waves-light btn" style="background-color: blue; margin-top: 30px;">button</div> -->
+    <h4>Nossa proposta</h4>
+    <p>Este site visa apresentar a <b>cultura de Araraquara</b>, eternalizando as <b>tradições orais, escritas e
+        gerais</b> da nossa cidade.<br>
+      Araraquara, conhecida como <b>Morada do Sol</b>, é uma cidade rica em história, cultura e tradições que atravessam
+      gerações. Este site nasce com o propósito de preservar e compartilhar essa <b>herança única</b>, valorizando as
+      histórias orais, as festas populares, os costumes e as peculiaridades que moldam a identidade araraquarense. Aqui,
+      buscamos reunir relatos, memórias e informações sobre as diversas <b>manifestações culturais</b> da nossa cidade,
+      desde as festas religiosas e folclóricas até as lendas urbanas e ditados populares. É um espaço onde <b>passado e
+        presente se encontram</b>, trazendo à tona a alma de Araraquara e oferecendo às novas gerações um contato
+      genuíno com a nossa essência cultural.
+    </p>
+
+    <div id="mapParagraph">
+
+      <div id="iframeDivParent" style="display: flex; flex-direction: row;">
+        <div id="iframeDiv" class="mapaResponsivo mapaDecoracao">
+          <div id="iframeBar">
+            <p>Pontos Turísticos de Araraquara</p>
+          </div>
+          <div id="mapaPlaceholder"></div>
+          <iframe class="mapaDecoracao" id="mapa"
+            src="https://www.google.com/maps/d/embed?mid=1-dJW342zgEAQaWa97fzSqrPmL_l3qmM&ehbc=2E312F&output=embed"
+            width="540" height="780" onload="hidePlaceholder()"></iframe>
+        </div>
+        <div class="mapaResponsivo"></div>
+      </div>
+
+      <div>
+        <h4 style="margin-left: 15px">A morada do sol</h4>
+        <p style="margin-top: 15px; margin-left: 15px;"><b>À esquerda</b>, você terá <b>acesso às localizações dos
+            pontos
+            turísticos</b> e às <b>áreas mais interessantes</b> da nossa querida cidade. Fique à vontade para navegar e
+          descobrir
+          mais, dos pontos mais famosos aos menos conhecidos.<br>
+          <br>
+          Acreditamos que a acessibilidade para todos seja uma <b>ótima forma de propagar as culturas e tradições
+            locais</b>.
+          Infelizmente, a maioria dos nossos jovens e muitos adultos não conhecem as coisas mais legais que nossa cidade
+          têm a oferecer. Nisso, vem a importância não só de um site, mas também de <b>um mapa que centraliza</b> todos
+          os pontos de referência e de
+          interesse para turistas e cidadãos.<br>
+          <br>
+          Do que adianta, afinal, falar dos <b>Campos de Aracoara</b>, nossa querida <b>toca do sol</b>, se não podemos
+          conhecer pessoalmente os lugares mais
+          interessantes dela?
+        </p>
+      </div>
+
+    </div>
+
+    <script>
+      function hidePlaceholder() {
+        const placeholder = document.getElementById('mapaPlaceholder');
+        placeholder.classList.add('hidden'); // Add the hidden class to start fading out
+        setTimeout(() => {
+          placeholder.style.display = 'none'; // Set display to none after the fade-out transition
+        }, 1000); // Match this duration with the CSS transition duration
+      }
+    </script>
+</section>

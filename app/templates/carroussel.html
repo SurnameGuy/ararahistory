@@ -43,13 +43,15 @@ padding: 10
         document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.carousel');
     var instances = M.Carousel.init(elems, options);
-  var instance = M.Carousel.getInstance(elem);
+    
+  function updateCarousel() {
+      var instance = M.Carousel.getInstance(elems[0]);
+      if (instance) {
+          instance.next();
+      }
+  }
+    setInterval(updateCarousel, 1500);
 
-  setInterval(function() {
-
-instance.next(); // Move to the next item
-
-}, 1000);
 
 });
 

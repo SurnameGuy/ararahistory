@@ -1,6 +1,78 @@
 <section id="artigos" style="background-color:#eaff8d; width:100%; height: 100%; padding:10px">
-  <div>
-    <div class="waves-effect waves-light btn" style="background-color: blue; margin-top: 30px;">button</div>
-    <p>ARTIGOS</p>
+  <style>
+    .cardImg {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .card {
+      filter: brightness(100%);
+      transition: filter 0.1s ease-in-out;
+      border-radius: 10px;
+      display: inline-grid;
+    }
+
+    .card:hover {
+      filter: brightness(90%);
+      transition: filter 0.1s ease-in-out;
+    }
+
+    #cardsContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      /* Responsive columns */
+      column-gap: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (min-width: 1200px) {
+
+      #cardsContainer {
+
+        grid-template-columns: repeat(4, 1fr);
+        /* Four columns on large screens */
+
+      }
+
+    }
+
+    @media (max-width: 800px) {
+      #cardsContainer {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        /* Fewer columns for smaller screens */
+      }
+    }
+
+    @media (max-width: 500px) {
+      #cardsContainer {
+        grid-template-columns: 1fr;
+        /* Single column for very small screens */
+      }
+    }
+  </style>
+  <div id="cardsContainer">
+
+    <div class="card">
+      <div class="cardImg"><img class="cardImg" src="img/lupo.png" alt="A história da Lupo">
+      </div>
+      <div style="padding: 5px">
+        <p font-family="Poppins"><b>A história da Lupo</b></p>
+        <p font-family="Poppins">&lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;</p>
+      </div>
+      </p>
+      <div style="padding: 5px">
+        <div class="waves-effect waves-light btn" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
+      </div>
+    </div>
+
+    {% for item in items %}
+      {% include 'card.html' with item=item %}
+    {% endfor %}
+
   </div>
+
 </section>

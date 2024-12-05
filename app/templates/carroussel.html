@@ -27,7 +27,7 @@
 
 
     <script>
-      var options = {
+      var carrouselOptions = {
 
 fullWidth: true,
 
@@ -42,7 +42,7 @@ padding: 10
 };
         document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.carousel');
-    var instances = M.Carousel.init(elems, options);
+    var instances = M.Carousel.init(elems, carrouselOptions);
     
   function updateCarousel() {
       var instance = M.Carousel.getInstance(elems[0]);

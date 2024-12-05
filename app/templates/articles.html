@@ -1,5 +1,95 @@
+{% load static %}
 <section id="artigos" style="background-color:#eaff8d; width:100%; height: 100%; padding:10px">
   <style>
+    @media only screen and (max-width: 600px) {
+
+      /* Zoom out the modal content on small screens */
+      .modalDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          font-size: 1em !important;
+          width: fit-content;
+          text-align: center;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-size: 2em !important;
+          width: fit-content;
+        }
+
+        img {
+          min-width: 100vw;
+          max-height: 300px;
+        }
+      }
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 60px);
+      overflow-y: scroll;
+      top: 60px;
+      position: fixed;
+      width: 100vw;
+    }
+
+    .modalDiv {
+      padding-top: 30em;
+      margin: 15px;
+    }
+
+    .modal-footer {
+      height: 60px !important;
+      position: fixed;
+    }
+
+    .material-icons {
+      font-family: "Material Icons" !important;
+    }
+
+    .modal p,
+    a {
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .modal {
+      min-width: 100vw;
+      min-height: 100vh;
+      top: 0 !important;
+    }
+
+    .modalImageContainer img {
+      width: fit-content;
+      height: max-content;
+      height: 500px;
+      object-fit: contain;
+      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .modalImageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: fit-content;
+      border-radius: 5px;
+    }
+
     .cardImg {
       width: 100%;
       height: 200px;
@@ -56,22 +146,84 @@
   </style>
   <div id="cardsContainer">
 
-    <div class="card">
-      <div class="cardImg"><img class="cardImg" src="img/lupo.png" alt="A história da Lupo">
-      </div>
-      <div style="padding: 5px">
-        <p font-family="Poppins"><b>A história da Lupo</b></p>
-        <p font-family="Poppins">&lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;</p>
-      </div>
-      </p>
-      <div style="padding: 5px">
-        <div class="waves-effect waves-light btn" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
-      </div>
-    </div>
+    <script src="{% static 'js/japescript.js' %}"></script>
+    <script>
+      async function loadArticles() {
+        const response = await fetch("{% static 'db/articles.json' %}");
+        const articlesJson = await response.json();
+        console.log(articlesJson);
 
-    {% for item in items %}
-      {% include 'card.html' with item=item %}
-    {% endfor %}
+        const cardsContainer = document.getElementById('cardsContainer');
+
+        for (x = 0; x < articlesJson.length; x++) {
+          var articleNumber = x
+          var articleTitle = articlesJson[x]['title']
+
+          console.log(x);
+          console.log(articleTitle);
+
+          let articleDescription = articlesJson[x]['description']
+          let articleImage = articlesJson[x]['image']
+          let articleContent = articlesJson[x]['content']
+
+          let card = `
+          <!-- CARD -->
+          <div class="card">
+            <div class="cardImg"><img class="cardImg" src="${articleImage}" alt="A história da Lupo">
+            </div>
+            <div style="padding: 5px">
+              <p font-family="Poppins"><b>${articleTitle}</b></p>
+              <p font-family="Poppins">${articleDescription}</p>
+            </div>
+            </p>
+            <div style="padding: 5px">
+              <div class="waves-effect waves-light btn modal-trigger" data-target="modal${articleNumber}" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
+            </div>
+          </div>
+
+          <!-- ARTIGO -->
+          <div id="modal${articleNumber}" class="modal">
+            <div class="modal-footer">
+              <a href="#!" class="modal-close waves-effect waves-red btn-flat" style="display: flex; flex-direction: row; align-items: center; width: fit-content"><i class="material-icons" style="font-size: 30px">arrow_back</i><p style="margin-left: 15px">Voltar</p></a>
+            </div>
+            <div class="modal-content">
+              <div class="modalDiv"">
+                <div style="width: 100%"></div>
+                <h3>${articleTitle}</h3>
+                <p><b>${articleDescription}</b></p>
+                <div class="modalImageContainer">
+                  <img src="${articleImage}">
+                </div>
+                <div>
+                  ${articleContent}
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+
+          const cardsContainer = document.getElementById('cardsContainer');
+          cardsContainer.insertAdjacentHTML('beforeend', card);
+
+          initializeModals();
+        };
+
+        var modalOptions = {
+        };
+
+        function initializeModals() {
+          var elems = document.querySelectorAll('.modal');
+          var instances = M.Modal.init(elems, modalOptions);
+        };
+      };
+
+      loadArticles();
+
+      document.addEventListener('DOMContentLoaded', function () {
+        initializeModals();
+      });
+
+    </script>
 
   </div>
 

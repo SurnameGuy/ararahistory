@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="static/img/favicon.ico">
+  <title>
+    
+  Ararahistory
+
+  </title>
+  <style>
+    /***** BASE.HTML *****/
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "Poppins", sans-serif !important;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: lightcyan;
+    }
+
+    .carousel-item img {
+      size: auto;
+      margin-right: 5px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.459);
+      display: block;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .btn {
+      border-radius: 5px;
+    }
+
+    .card {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      background-color: white;
+    }
+
+    .carousel {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    p {
+      font-size: 18px;
+      color: rgb(39, 39, 39);
+    }
+
+
+    /***** NAVBAR.HTML *****/
+    .tab {
+      width: 100%;
+      height: 100%;
+    }
+
+
+
+    /***** INICIO.HTML *****/
+    #iframeDiv {
+      position: absolute;
+      width: 540px;
+      height: 640px;
+      overflow: hidden;
+    }
+
+    #iframeDivParent {
+      width: fit-content !important;
+      height: fit-content !important;
+    }
+
+    .mapaDecoracao {
+      border: hidden;
+      border-radius: 15px;
+    }
+
+    #mapa {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 540px;
+      height: 480px;
+    }
+
+    #iframeBar {
+      width: 100%;
+      height: 50px;
+      background-color: blue;
+      position: relative;
+      z-index: 400;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        color: white;
+        font-size: 18px;
+        margin-left: 15px
+      }
+
+    }
+
+    .mapaResponsivo {
+      height: 640px;
+      width: 540px;
+      margin-top: 15px
+    }
+
+    #mapaPlaceholder {
+      background-image: url("static/img/map.png");
+      background-size: cover;
+      /* Zoom to fit */
+      background-position: center;
+      /* Center the image */
+      width: 100%;
+      height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      position: absolute;
+      z-index: 1;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      opacity: 1;
+      /* Fully visible */
+      transition: opacity 1s ease;
+      /* Transition effect for fading */
+    }
+
+    #mapaPlaceholder.hidden {
+      opacity: 0;
+      /* Hidden state */
+    }
+
+    #mapParagraph {
+      display: flex;
+      flex-direction: row;
+      margin-top: 1.52rem;
+    }
+
+    #divOndeTemODisco {
+      display: flex;
+      flex-direction: row;
+    }
+
+    #discoContainer {
+      height: fit-content;
+    }
+
+    @media (max-width: 1100px) {
+
+      #mapParagraph,
+      #divOndeTemODisco {
+        flex-direction: column;
+        padding: 0;
+        justify-content: center;
+      }
+
+      .mapaResponsivo {
+        width: 100%;
+      }
+
+      #auau {
+        margin-top: -200px;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #disco {
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .rotate {
+      animation: rotate 2s infinite linear;
+    }
+
+    .pause {
+      animation-play-state: paused;
+    }
+
+
+
+
+    /***** ARTICLES.HTML *****/
+    h5, h4, h3, h2, h1 {
+      font-weight: bold !important;
+      font-style: bold !important;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: calc(100vh - 60px);
+      overflow-y: scroll;
+      top: 60px;
+      position: fixed;
+      width: 100vw;
+      padding-top: 30px;
+      padding-left: 100px;
+      padding-right: 100px;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      height: 60px !important;
+      width: 100%;
+      position: fixed;
+      background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; position: fixed; z-index: 500;
+      z-index: 9999px;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: left;
+      width: 100%;
+      height: 100%;
+    }
+
+    .material-icons {
+      font-family: "Material Icons" !important;
+    }
+
+    .modal p,
+    a {
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .modal {
+      min-width: 100vw;
+      min-height: 100vh;
+      top: 0 !important;
+    }
+
+    .modalImageContainer img {
+      width: fit-content;
+      height: max-content;
+      height: 700px;
+      object-fit: contain;
+      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .modalImageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: fit-content;
+      border-radius: 5px;
+      margin-bottom: 40px;
+    }
+
+    .cardImg {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .card {
+      filter: brightness(100%);
+      transition: filter 0.1s ease-in-out;
+      border-radius: 10px;
+      display: inline-grid;
+      background-color: #f9f9f9;
+    }
+
+    .card:hover {
+      filter: brightness(90%);
+      transition: filter 0.1s ease-in-out;
+    }
+
+    #cardsContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      /* Responsive columns */
+      column-gap: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 800px) {
+      .content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }    
+
+    @media (min-width: 1200px) {
+
+      #cardsContainer {
+
+        grid-template-columns: repeat(4, 1fr);
+        /* Four columns on large screens */
+
+      }
+
+    }
+
+    @media (max-width: 800px) {
+      #cardsContainer {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        /* Fewer columns for smaller screens */
+      }
+    }
+
+    @media (max-width: 500px) {
+      #cardsContainer {
+        grid-template-columns: 1fr;
+        /* Single column for very small screens */
+      }
+    }
+
+
+
+
+
+    /***** ABOUT.HTML *****/
+
+    #comofoi,
+    p {
+      text-align: justify;
+    }
+
+    #oq {
+      text-align: justify;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 25px;
+    }
+
+
+    /***** FOOTER.HTML *****/
+    .sponsor {
+        object-fit: contain;
+        max-width: 80px;
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--JavaScript at end of body for optimized loading-->
+
+
+</head>
+
+<body>
+
+  <div style="flex: 1; display: flex; flex-direction: column; width: 100%;">
+    
+
+<div id="loadingScreen">
+  <img src="static/img/sol.png" id="logo" fetchpriority="high" rel="preload">
+</div>
+
+<style>
+  #loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1d29d2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999; /* Ensure it covers the content */
+    opacity: 1; /* Initially fully visible */
+    transition: opacity 1s ease-out; /* Add transition for opacity */
+}
+#logo {
+    width: 15vw; /* Adjust the logo size as needed */
+    height: auto;
+    animation: zoomOut 7s ease-out forwards;
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1.7); /* Start slightly larger */
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1); /* End at normal size */
+        opacity: 1;
+    }
+}
+</style>
+
+
+ <nav class="nav-extended"
+  style="box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; position: fixed; z-index: 500;">
+  <div
+    style="display:flex; flex-direction: column; width: 100vw; background-color: darkBlue; display: flex; align-items: center; padding: 0">
+    <div style="width: 100%; display: flex; align-items: center;">
+      <div style="display: flex; flex-direction: column; height: 100%; width: auto">
+        <img src="static/img/sol.png" style="height: 100%; width: 3em; margin-left:20px">
+      </div>
+      <p style="font-family: Poppins; font-size: 20px; color:gold; margin-left:20px"><b>Ararahistory</b></p>
+    </div>
+    <div class="nav-content" style="width:100%; background-color: blue; padding: 0%">
+      <ul class="tabs tabs-transparent" style="display: flex; flex-direction: row; justify-content: space-around;">
+        <li class="tab"><a class="active" href="#inicio"><b>INÍCIO</b></a></li>
+        <li class="tab"><a href="#artigos"><b>ARTIGOS</b></a></li>
+        <li class="tab"><a href="#sobre"><b>SOBRE</b></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Abaixo, um espaço fictício para o site de 112px para ocupar o espaço da navbar, mais um tamanho adicional para simular uma margin-bottom -->
+<div style="width: 100vw; height: calc(112px + 20px)"></div>
+ 
+<section id="inicio" style="background-color:transparent; width:100%; height: 100%; padding:10px">
+
+  <div>
+    <p><b>Conheça a história da cidade de Araraquara e suas tradições.</b></p>
+    
+<div class="MuiBox-root css-zrayqo">
+    <div class="MuiBox-root css-1538kr" style="color: white;"></div>
+    <div class="carousel">
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa1.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa2.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa3.jpe"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa4.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa5.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa6.webp"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa7.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/artigo1.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/basalto.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/britos.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/casarao.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/ferroviaria.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/igreja.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/pqinfantil.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/sapucaia.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/toledo.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/trolebus.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/tropical.jpeg"></div>
+
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa1.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa2.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa3.jpe"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa4.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa5.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa6.webp"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/aqa7.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/artigo1.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/basalto.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/britos.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/casarao.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/ferroviaria.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/igreja.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/pqinfantil.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/sapucaia.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/toledo.jpg"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/trolebus.png"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="static/img/tropical.jpeg"></div>
+    </div>
+
+
+    <!-- script>
+        var carrouselOptions = {
+
+            fullWidth: true,
+
+            indicators: false,
+
+            duration: 200,
+
+            numVisible: 30,
+
+            padding: 10
+
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.carousel');
+            var instances = M.Carousel.init(elems, carrouselOptions);
+
+            function updateCarousel() {
+                var instance = M.Carousel.getInstance(elems[0]);
+                if (instance) {
+                    instance.next();
+                }
+            }
+            setInterval(updateCarousel, 2500);
+
+
+        });
+
+    </script -->
+    
+</div>
+    <!-- <div class="waves-effect waves-light btn" style="background-color: blue; margin-top: 30px;">button</div> -->
+    <h4>Nossa proposta</h4>
+    <p>Este site visa apresentar a <b>cultura de Araraquara</b>, eternalizando as <b>tradições orais, escritas e
+        gerais</b> da nossa cidade.<br>
+      Araraquara, conhecida como <b>Morada do Sol</b>, é uma cidade rica em história, cultura e tradições que atravessam
+      gerações. Este site nasce com o propósito de preservar e compartilhar essa <b>herança única</b>, valorizando as
+      histórias orais, as festas populares, os costumes e as peculiaridades que moldam a identidade araraquarense. Aqui,
+      buscamos reunir relatos, memórias e informações sobre as diversas <b>manifestações culturais</b> da nossa cidade,
+      desde as festas religiosas e folclóricas até as lendas urbanas e ditados populares. É um espaço onde <b>passado e
+        presente se encontram</b>, trazendo à tona a alma de Araraquara e oferecendo às novas gerações um contato
+      genuíno com a nossa essência cultural.<br>
+      <br>Por fim, <b>nosso objetivo é oferecer um espaço onde todos possam se aprofundar</b> no que Araraquara tem de
+      melhor, seja conhecendo nossos pontos turísticos ou simplesmente conhecendo as lendas e tradições que definem a
+      alma de nossa cidade. Sinta-se em casa e fique à vontade para <b>explorar tudo o que preparamos com tanto carinho
+        para você</b>!
+    </p>
+    <h4>Sobre nossa "pequena" cidade</h4>
+    <p>
+      <b>Araraquara</b> é um município localizado no interior do estado de <b>São Paulo</b>, Brasil, a
+      aproximadamente 270 km da capital paulista. Segundo estimativas de julho de 2024, sua população é de
+      <b>252.318 habitantes</b>, sendo o <b>34º município mais populoso do estado</b>. Fundada em 22 de agosto de
+      1817, Araraquara tem suas origens ligadas aos <b>índios guaianás</b>, primeiros habitantes da região.<br>
+      <br>Ao longo do século XX, a cidade desenvolveu <b>indústrias</b> e um <b>comércio ativo</b>, além de criar
+      escolas, clubes e universidades que contribuíram para seu crescimento.<br><br>
+      A economia de Araraquara é diversificada, com destaque para os setores <b>industrial</b>, <b>comercial</b>
+      e <b>agrícola</b>. A cidade é conhecida pela produção de <b>cana-de-açúcar</b>, <b>laranja</b> e <b>café</b>. Além
+      disso, abriga empresas de relevância nacional, como a <b>Lupo</b>, uma das maiores fabricantes de roupas íntimas,
+      meias e roupas esportivas do Brasil, reconhecida pela <b>qualidade de seus produtos</b> e pela inovação no
+      <b>setor têxtil</b>, e a <b>Cutrale</b>, na
+      produção e exportação de <b>suco de laranja</b>, consolidando Araraquara como <b>um dos principais polos do
+        setor</b>.
+    </p>
+    <h4>Achou que acabava por aí?</h4>
+    <p><b>O município de Araraquara</b> é formado, além do próprio distrito de <b>Araraquara</b>, pela <b>Vila
+        Xavier</b> (Sim, ela é considerada um distrito) e <b>Bueno de Andrada</b> (Sim, isso mesmo!). Ah, as <b>Coxinhas
+        Douradas</b>! Todo mundo conhece, inclusive as <b>Coxinhas da Dona Nita</b> (Que, segundo boatos, é quem
+      elaborou a receita original das <b>Coxinhas Douradas</b>, porém carece de fontes). As <b>coxinhas de Bueno</b> -
+      em outras palavras, dessa pequena região que também faz parte de <b>Araraquara</b> - são deliciosas, e não há quem
+      discorde!<br><br><b>Calma que tem mais!</b> Também somos formados pelo <b>Assentamento Bela Vista</b>,
+      <b>Assentamento Monte Alegre</b> e <b>Horto de Bueno</b>. Aliás, você sabia que em <b>1833</b>, éramos formados
+      pelos distritos de <b>São Bento de Araraquara</b>, <b>Rincão</b> e <b>Santa Luzia</b>? É, meu caro amigo, aposto
+      que você não sabia de muita coisa que eu te contei agora.
+    </p>
+    <h4>Também temos habilidades no futebol</h4>
+    <p>Araraquara possui uma rica história no futebol, com clubes que marcaram diferentes épocas. Atualmente, o
+      principal representante da cidade é a <b>Associação Ferroviária de Esportes</b>, conhecida como Ferroviária.
+      Fundada em 12 de abril de 1950 por funcionários da antiga Estrada de Ferro Araraquara, a Ferroviária consolidou-se
+      como um dos clubes mais tradicionais do interior paulista. Suas cores são o grená e o branco, e o time manda seus
+      jogos na Arena da Fonte Luminosa, com capacidade para 20.000 espectadores. Ao longo de sua trajetória, a
+      Ferroviária revelou diversos talentos para o futebol brasileiro e participou de competições importantes, como a
+      Série A do Campeonato Brasileiro e a Copa do Brasil.</p>
+
+    <div id="resto">
+      <div>
+        <h4>A Morada do Sol... Ou não?</h4>
+        <p>Muitas pessoas se perguntam o motivo do nome da nossa cidade ser esse. Alguns dizem ser uma tradução em
+          Tupi-Guarani para "<b>Toca das Araras</b>", já outras pessoas acreditam ser "<b>Toca do Sol</b>". A verdadeira
+          origem do
+          nome, no entanto, está ligada a um episódio histórico curioso.
+          <br><br>
+          Mas antes de continuarmos, por que não toca o
+          belíssimo <b>hino da nossa cidade</b>? Temos aqui uma versão bem antiga, a original. <b>Basta clicar no disco
+            abaixo, localizado no lado esquerdo da tela, para ouvi-lo.</b>
+        </p>
+
+
+        <div id="divOndeTemODisco">
+
+          <div id="discoContainer">
+            <audio id="hinoTag" style="visibility: hidden;" controls>
+              <source src="static/audio/hinoaqa.webm" type="audio/webm">
+              <b>Caro usuário, detectamos que o seu navegador não suporta o elemento de áudio. Por este motivo,
+                ficaremos
+                te
+                devendo essa.</b>
+            </audio>
+            <div id="hinoDiv" style="width:15rem; height:15rem">
+              <img src="static/img/disco.png" id="disco" class="rotate">
+            </div>
+          </div>
+
+          <div id="divTextoDoLadoDoDisco">
+            <br>
+            <p>Dom Pedro II visitou Araraquara na inauguração do tráfego provisório da ferrovia na cidade, no dia 6 de
+              novembro de 1886. Quando desembarcou, questionou aos seus infitriões o significado ou origem do nome da
+              cidade. As autoridades locais, então, defenderam a teoria de que o nome significava “Terra das Araras”, em
+              razão da grande quantidade de aves da espécie que habitavam a região.</p>
+            <br>
+            <p>O imperador, porém, com seu vasto conhecimento por ser um ferrenho pesquisador e conhecedor do Tupi,
+              corrigiu as autoridades locais e explicou o verdadeiro significado da palavra, mostrando os estudos do
+              tupinólogo e criador da gramática Tupi, Padre José Anchieta.</p>
+            <br>
+            <p>O verdadeiro significado seria então "Morada do Sol", ainda que existam debates sobre isso até os dias de
+              hoje. Por exemplo, como na obra "Monografia da Palavra Araraquara", escrita por Pio Lourenço Corrêa, que
+              indica possíveis falhas no apontamento de Dom Pedro II e estuda outras teorias.</p>
+            <br>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <div>
+      <p>Mas, de qualquer forma, uma coisa é certa: Araraquara não deixa de ser morada do sol e das araras,
+        independentemente do nome da cidade.</p>
+      <br>
+      <h4>Mais curiosidades</h4>
+      <p>Eu aposto que você não sabia que <b>Herbert Richers</b> é nascido aqui. Sim, isso mesmo, o finado
+        produtor de cinemas que hoje tem com seu nome o maior estúdio de dublagens do Brasil!</p>
+      <br>
+      <p>E que existe um posto de combustível tematizado com o Batman e com um avião em exposição (Auto Posto
+        Bambina), dentre outros pontos muito legais e interessantes? Sabia disso?</p>
+      <br>
+      <p>Bom, se quer saber mais, recomendo <b>ler os nossos artigos</b>.</p>
+    </div>
+
+    <div id="mapParagraph">
+
+      <div id="iframeDivParent" style="display: flex; flex-direction: row;">
+        <div id="iframeDiv" class="mapaResponsivo mapaDecoracao">
+          <div id="iframeBar">
+            <p>Pontos Turísticos de Araraquara</p>
+          </div>
+          <div id="mapaPlaceholder"></div>
+          <iframe class="mapaDecoracao" id="mapa"
+            src="https://www.google.com/maps/d/embed?mid=1-dJW342zgEAQaWa97fzSqrPmL_l3qmM&ehbc=2E312F&output=embed"
+            width="540" height="780" onload="hidePlaceholder()"></iframe>
+        </div>
+        <div class="mapaResponsivo"></div>
+      </div>
+
+      <div id="auau">
+        <h4 style="margin-left: 15px">Pontos turísticos</h4>
+        <p style="margin-top: 15px; margin-left: 15px;"><b>À esquerda</b>, você terá <b>acesso às localizações dos
+            pontos
+            turísticos</b> e às <b>áreas mais interessantes</b> da nossa querida cidade. Fique à vontade para navegar e
+          descobrir
+          mais, dos pontos mais famosos aos menos conhecidos.<br>
+          <br>
+          Acreditamos que a acessibilidade para todos seja uma <b>ótima forma de propagar as culturas e tradições
+            locais</b>.
+          Infelizmente, a maioria dos nossos jovens e muitos adultos não conhecem as coisas mais legais que nossa cidade
+          têm a oferecer. Nisso, vem a importância não só de um site, mas também de <b>um mapa que centraliza</b> todos
+          os pontos de referência e de
+          interesse para turistas e cidadãos.<br>
+          <br>
+          Do que adianta, afinal, falar dos <b>Campos de Aracoara</b>, nossa querida <b>toca do sol</b>, se não podemos
+          conhecer pessoalmente os lugares mais
+          interessantes dela?<br>
+          <br>Desde a Igreja Matriz até o Casarão de Bela Vista, nossa cidade é rica de histórias. Podemos não ter
+          muitos lugares interessantes para visitar (Além das dezenas de interessantíssimos pontos turísticos que
+          temos), mas uma coisa é certa: <b>Cultura definitivamente temos</b>. Não é atoa que somos uma das cidades que
+          são referências no interior do estado de São Paulo.
+        </p>
+      </div>
+
+    </div>
+
+    <script>
+
+    </script>
+
+    <script>
+
+    </script>
+  </div>
+</section>
+ 
+<section id="artigos" style="background-color:transparent; width:100%; height: 100%; padding:10px">
+  <div id="cardsContainer">
+    <script>
+    const articlesJson = [
+    {
+        "title": "A antiga história da Lupo, a fábrica que hoje também é shopping",
+        "description": "O Shopping Lupo, é um centro comercial focado em oferecer uma experiência de compras diversificada, com lojas de roupas e calçados, sendo conhecido pela presença da famosa marca de meias e lingerie Lupo.",
+        "image": "static/img/artigo1.png",
+        "content": "<h4>Inovações pioneiras</h4>\n<p>A Lupo foi fundada em <i>1921</i> por Henrique Lupo, na cidade de Araraquara, São Paulo. Inicialmente, a empresa focava na produção de meias masculinas, que eram bordadas à mão, um trabalho realizado principalmente por mulheres. A marca rapidamente se destacou pela qualidade dos seus produtos.</p>\n\n<p>Na década de <i>1940</i>, a Lupo tornou-se pioneira no Brasil ao introduzir o uso de fios de nylon na fabricação de meias, o que marcou um grande avanço no setor têxtil. Em <i>1960</i>, a empresa iniciou a produção de meias-calças, expandindo sua linha de produtos para atender o público feminino.</p>\n\n<h4>Expansão e Modernização</h4>\n<p>Durante os anos <i>1980</i>, a Lupo expandiu suas operações com a inauguração de uma nova fábrica em Araraquara. Nos anos <i>1990</i>, introduziu a produção de cuecas e deu início à modernização de sua gestão, com Liliana Aufiero assumindo o cargo de CEO em <i>1993</i>. Ela foi a primeira mulher a ocupar a presidência da empresa.</p>\n\n<h4>Entrada em Novos Mercados</h4>\n<p>Em <i>1994</i>, a Lupo abriu sua primeira loja em um shopping center, no Shopping D, em São Paulo. Essa iniciativa marcou o início da estratégia de vendas diretas ao consumidor, consolidando a presença da marca no varejo nacional. Já em <i>2002</i>, quem abriu um shopping foi a própria Lupo, no lugar de sua antiga fábrica em Araraquara, dando lugar ao Shopping Lupo!</p>\n\n<p>No ano de <i>2016</i>, a Lupo adquiriu as marcas TriFil e Scala, diversificando ainda mais sua oferta de produtos. A linha <i>Lupo Sport</i>, voltada para o mercado esportivo, foi lançada para atender às novas demandas de consumidores por vestuário casual e fitness.</p>\n\n<p>Durante a pandemia de COVID-19, a empresa mostrou sua capacidade de adaptação ao iniciar a produção de máscaras de proteção. Em <i>2021</i>, a Lupo celebrou seu centenário com a inauguração de novas unidades fabris e melhorias na governança corporativa.</p>\n\n<h4>Legado, marcos e presença atual</h4>\n<p>Em <i>2022</i>, a empresa abriu sua terceira fábrica em Pacatuba, Ceará, aproveitando incentivos fiscais e ampliando suas capacidades produtivas. Atualmente, a Lupo é reconhecida por seu compromisso com a inclusão, tendo <b>82%</b> de mulheres em seu quadro de funcionários.</p>\n\n<p>Com mais de <b>800 pontos de venda</b> em todo o Brasil, a Lupo é referência no setor têxtil. Ao longo de mais de um século, a marca manteve sua essência inovadora, adaptando-se às tendências de mercado e atendendo às necessidades de seus clientes com produtos de alta qualidade.</p>"
+    },
+    {
+        "title": "Conheça o sistema de... troleibus!",
+        "description": "O Trólebus de Araraquara foi um sistema de transporte público inovador, implantado em 1959, movido a eletricidade e livre de poluição, que circulou pela cidade até 1999, sendo um marco na história do transporte urbano sustentável no Brasil.",
+        "image": "static/img/trolebus.png",
+        "content": "<h4>História do Sistema de Trólebus de Araraquara</h4>\n\n<p>O sistema de trólebus de Araraquara foi um marco no transporte público da cidade. Implantado em 1959, durante a administração do prefeito Rômulo Lupo, o sistema de ônibus elétricos trouxe grandes avanços para a cidade, que se tornou um exemplo de sustentabilidade e inovação tecnológica. Inspirado por uma visita do prefeito à Itália, o modelo foi escolhido por ser silencioso, não poluente e de manutenção econômica, características que agradaram a população local.</p>\n\n<h4>Funcionamento e Expansão</h4>\n\n<p>O sistema foi gradualmente expandido, com várias linhas conectando diferentes áreas da cidade. Ao longo de suas quatro décadas de operação, os trólebus foram um ícone de Araraquara. Eles eram veículos movidos por energia elétrica, alimentados por fios suspensos, o que reduz o impacto ambiental.</p>\n\n<h4>Desativação e Legado</h4>\n\n<p>Apesar de seu sucesso inicial, o sistema foi desativado em 1999 devido à obsolescência dos veículos e à dificuldade de manutenção. A cidade passou a adotar outros tipos de transporte coletivo, mas o legado dos trólebus continua vivo até hoje em Araraquara, sendo lembrado como um exemplo pioneiro de transporte público sustentável no Brasil. É possível visitar o primeiro trólebus de Araraquara, na praça da fonte luminosa (DAAE), que fica em exposição.</p>"
+    },
+    {
+        "title": "O Coronel, os Britos e a Linchaquara.",
+        "description": "O Cemitério dos Britos, em Araraquara, é um cemitério histórico que remonta ao período de colonização, sendo conhecido por abrigar sepulturas de imigrantes britânicos e por sua arquitetura peculiar, com túmulos que refletem o estilo funerário da época.",
+        "image": "static/img/britos.png",
+        "content": "<h4>História do Coronel Antônio Joaquim de Carvalho e o Caso dos Britos</h4>\n\n<h5>Coronel Antônio Joaquim de Carvalho: Um Líder Republicano</h5>\n<p>\nAntônio Joaquim de Carvalho nasceu em Porto Feliz, em 7 de julho de 1838. Formou-se em Direito, mas nunca exerceu a advocacia, dedicando-se à lavoura e ao comércio de café. Em 1875, mudou-se para Araraquara, onde se tornou uma figura central na política republicana, comandando fazendas como a Simão e Bella Vista. Durante o período do coronelismo, sua influência foi marcante, especialmente como chefe político local após a Proclamação da República.\n</p>\n<p>\nEm 30 de janeiro de 1897, Carvalho foi morto após um confronto com Rozendo Brito, um jornalista monarquista. O evento marcou profundamente a história de Araraquara e ficou conhecido como o ''Caso dos Britos''.\n</p>\n\n<h5>O Caso dos Britos: Contexto e Tragédia</h5>\n<p>\nRozendo Brito, jornalista sergipano, era crítico do coronel Antônio Joaquim em suas publicações no jornal local <i>O Binóculo</i>. Em um dia de janeiro de 1897, após um confronto verbal e físico na Farmácia São Bento, Rozendo disparou mortalmente contra o coronel. Rozendo e seu tio, Manoel Brito, foram presos e levados à cadeia pública.\n</p>\n<p>\nNa madrugada de 7 de fevereiro, uma semana após o enterro de Antônio Joaquim, Rozendo e Manoel foram linchados por uma multidão enfurecida no Largo da Matriz. Seus corpos foram abandonados na praça e depois enterrados no Cemitério das Cruzes, marcando o evento como um dos mais violentos da história da cidade. Este episódio consolidou a expressão ''Linchaquara'' como apelido para Araraquara.\n</p>\n\n<h5>O Padre e a Igreja no Caso dos Britos</h5>\n<p>\nO padre Antônio Cezarino, pároco da Igreja Matriz, tentou conter a violência, mas chegou tarde. Há relatos conflitantes sobre seu papel: alguns dizem que ele rogou uma praga sobre a cidade após a tragédia, enquanto outros atribuem essa ação à mãe de Rozendo. Também existem boatos de que o Padre fechou a porta de propósito para os Britos, porém carece de fontes. Os sinos da igreja teriam tocado sozinhos naquela noite, reforçando as lendas locais.\n</p>\n\n<h5>Legado Histórico</h5>\n<p>\nO caso simboliza o clima político e social tenso da época, além de destacar os conflitos entre monarquistas e republicanos. Hoje, o episódio é lembrado como parte da identidade histórica de Araraquara e segue alimentando lendas e debates sobre o papel do coronel, da igreja e dos linchadores.\n</p>"
+    },
+    {
+        "title": "História do Parque do Basalto",
+        "description": "O Parque Basalto de Araraquara é uma área de lazer localizada em meio a formações rochosas onde foram realizadas extrações de basalto, conhecida por sua beleza, oferecendo um ambiente de convivência e contato com a natureza.",
+        "image": "static/img/basalto.png",
+        "content": "<h4>História do Parque do Basalto</h4>\n<p><b>O Parque do Basalto</b> ocupa uma área de 65 mil m² entre os bairros Jardim Pinheiros e Parque Residencial São Paulo, em Araraquara. Sua história começou em 1938, quando o local foi utilizado como pedreira para extração de basalto, atividade que durou até 1965. Após décadas de abandono, a área despertou interesse ambiental em 1996.</p>\n\n<p>Em 1998, no <i>Dia Mundial do Meio Ambiente</i>, a área foi cedida à <b>Uniara (Universidade de Araraquara)</b> para a construção de um parque ecológico. A inauguração ocorreu em 2000, com o local transformado em um refúgio de biodiversidade e turismo.</p>\n\n<h4>Revitalização e Biodiversidade</h4>\n<p>O parque apresenta rica fauna e flora, com mais de 150 espécies de animais e 350 tipos de plantas, incluindo 200 árvores nativas. Suas atrações incluem cachoeiras, paredões de basalto formados há mais de 120 milhões de anos, trilhas ecológicas e um Centro de Educação Ambiental. A revitalização iniciada em 2020 trouxe melhorias como quiosques, passarelas e iluminação com tecnologia LED.</p>\n\n<p>Atualmente, o Parque é gerido pela Secretaria Municipal de Meio Ambiente e Sustentabilidade e está aberto ao público para visitação gratuita, sendo um importante espaço para lazer e educação ambiental em Araraquara.</p>"
+    },
+    {
+        "title": "História da Igreja Matriz São Bento",
+        "description": "A Igreja Matriz de Araraquara é um importante templo católico, símbolo religioso e histórico da cidade, com arquitetura neoclássica e construída no século XIX.",
+        "image": "static/img/igreja.jpg",
+        "content": "<h4>História da Igreja Matriz de São Bento em Araraquara</h4>\n<p><b>A Igreja Matriz de São Bento</b>, localizada no marco zero de Araraquara, é um dos patrimônios históricos mais importantes da cidade. Fundada em 1817, a primeira capela foi construída em palha por Pedro José Neto, um dos desbravadores da região. Essa capela foi elevada a paróquia pelo bispo Dom Matheus de Abreu Pereira, marcando o início da evangelização na área conhecida como ''Sertão de Araraquara''.</p>\n<p>Ao longo dos séculos, a Matriz passou por diversas transformações. A construção atual é a quinta versão do edifício, que mantém elementos históricos e artísticos de grande valor.</p>\n<h5>Arquitetura e Acervo Histórico</h5><p>A Igreja abriga um rico acervo de imagens sacras esculpidas em madeira, datadas do século XIX, como as representações de São Bento, Imaculada Conceição, São José e Santo Antônio. As peças, muitas delas restauradas, destacam-se por sua beleza e simbolismo. Recentemente, uma escultura de São Miguel, vinda da Itália, foi incorporada ao acervo.</p>\n<p>O interior da Igreja também carrega histórias de devoção. Os bancos de madeira foram adquiridos com a contribuição de famílias locais, que tiveram seus nomes gravados como forma de reconhecimento. A cripta da Igreja, construída entre as décadas de 1970 e 1980, abriga mais de 1.400 túmulos, incluindo os restos mortais de personalidades marcantes como Pedro José Neto e o maestro José Tescari.</p>\n<h5>Impacto Religioso e Social</h5><p>Desde sua fundação, a Igreja Matriz desempenha um papel central na vida religiosa da região. Durante o século XIX, era o único local na área com a presença de um sacerdote, tornando-se o ponto de referência para batismos, casamentos e outros sacramentos. Hoje, a Igreja Matriz celebra mais de 450 batizados e 50 casamentos anualmente, além de realizar 17 cultos semanais que reúnem milhares de fiéis.</p>\n<p>Além de sua função religiosa, a Igreja Matriz de São Bento se destaca por suas ações sociais. A paróquia apoia moradores de rua e famílias em situação de vulnerabilidade, promovendo a assistência espiritual e material.</p>\n<h5>Legado e Relevância Atual</h5><p>A Igreja Matriz de São Bento não é apenas um símbolo da fé católica em Araraquara, mas também um marco de sua identidade cultural. Sua localização no centro da cidade e sua rica história a tornam um espaço de memória coletiva e espiritualidade. A cada ano, sua relevância é reafirmada como um ponto de união entre o passado e o presente da comunidade local.</p>"
+    },
+    {
+        "title": "Folclore e Lendas da Igreja Matriz de São Bento em Araraquara",
+        "description": "A Igreja Matriz de Araraquara é um importante templo católico, símbolo religioso e histórico da cidade, com arquitetura neoclássica e construída no século XIX.",
+        "image": "static/img/araracobra.png",
+        "content": "<h4>Mitologia acerca da Igreja Matriz de Araraquara</h4>\n\n<h5>A Lenda da Serpente Sob o Altar</h5>\n<p>Uma das histórias mais fascinantes relacionadas à Igreja Matriz de São Bento é a da serpente gigante que estaria adormecida sob o altar principal. Acredita-se que, caso a cobra acorde, ela destruiria a cidade de Araraquara. Segundo os contos locais, essa serpente seria um símbolo de punição divina ou de um mistério ancestral, guardando o segredo do templo e protegendo-o contra profanações. Diversas gerações de moradores narraram variações dessa história, alimentando a imaginação popular. Outra versão é sobre dois jovens que se opuseram ao oligarca da região, foram assassinados e arrastados. O sangue deles teriam afundado no subsolo e formado uma serpente kaiju que se espalha da Igreja Matriz até o cemitério nos arredores.</p>\n\n<h5>Os Túneis Subterrâneos</h5>\n<p>Outro elemento do folclore local envolve a existência de túneis secretos sob a igreja, supostamente conectando-a a outros pontos históricos de Araraquara, como a Chácara Sapucaia. Embora nunca comprovados, alguns dizem que esses túneis foram usados por padres para fins estratégicos ou mesmo para esconder objetos valiosos durante períodos de instabilidade política e social. Relatos de passagens bloqueadas ou entradas misteriosas reforçam a aura de mistério.</p>\n\n<h5>O Fantasma do Sacristão</h5>\n<p>Entre os mitos menos conhecidos, está a história de um antigo sacristão que teria falecido de forma trágica. Diz-se que sua alma ainda perambula pelo local, especialmente durante a noite, movendo objetos e causando sons inexplicáveis. Este mito é frequentemente mencionado em conversas informais entre os moradores mais antigos.</p>\n\n<h5>Histórias de Luzes e Fenômenos Sobrenaturais</h5>\n<p>Outra lenda que ganha força envolve luzes misteriosas avistadas ao redor da cúpula da igreja durante a noite. Alguns acreditam que essas luzes sejam manifestações divinas ou fenômenos naturais relacionados à energia espiritual do local.</p>"
+    },
+    {
+        "title": "A senzala ''mal-assombrada'' de Araraquara",
+        "description": "O Casarão do assentamento Bela Vista, em Araraquara é um marco histórico que representa a arquitetura colonial e a história da escravidão no Brasil, sendo hoje patrimônio cultural da cidade.",
+        "image": "static/img/casarao.jpg",
+        "content": "<h4>História do Casarão da Bela Vista</h4>\n\n<p>O Casarão da Bela Vista, localizado em Araraquara, é um símbolo da história rural brasileira, remontando ao auge da economia cafeeira no final do século XIX. Construído em <i>1880</i>, serviu como sede da Fazenda Bela Vista do Chibarro, um importante centro de produção agrícola da região.</p>\n\n<h5>Arquitetura e Usos Originais</h5>\n<p>O casarão reflete a arquitetura típica da época, com uma estrutura imponente em estilo colonial. Durante seu período de funcionamento como sede da fazenda, abrigava os proprietários no andar superior, enquanto o inferior servia como alojamento para escravizados, evidenciando a dinâmica social do período.</p>\n\n<p>Na frente do casarão, dois terreiros de café em níveis diferentes eram usados para a secagem dos grãos, que representavam o ''ouro negro'' do Brasil imperial. Posteriormente, com a decadência do ciclo do café, o espaço foi convertido para atender à produção de cana-de-açúcar.</p>\n\n<h5>Transformações ao Longo do Tempo</h5>\n<p>Após o declínio das atividades agrícolas da fazenda, o casarão passou por várias mudanças. Nos anos seguintes ao fechamento da usina de cana-de-açúcar, a propriedade foi incorporada ao Assentamento Bela Vista, como parte de políticas de reforma agrária.</p>\n\n<p>Em <i>2018</i>, o casarão foi tombado como patrimônio histórico, reconhecendo sua importância cultural e arquitetônica. Mesmo em estado de deterioração, permanece um marco da história de Araraquara e do desenvolvimento rural brasileiro.</p>\n\n<h5>Importância Cultural e Turística</h5>\n<p>O Casarão da Bela Vista também carrega um forte componente cultural. Histórias e lendas sobre assombrações, como o espírito do antigo proprietário, coronel Antônio Joaquim de Carvalho, cercam o local, atraindo visitantes interessados em mistérios e história.</p>\n\n<p>Devido ao seu valor histórico, o imóvel é considerado um potencial ponto turístico. A Prefeitura de Araraquara, em parceria com o <i>Incra</i>, busca recursos para a restauração do casarão, planejando transformá-lo em um espaço multiuso para atividades culturais, educacionais e recreativas.</p>\n\n<h5>Desafios de Preservação</h5>\n<p>Preservar o casarão é uma tarefa desafiadora. O projeto de restauração envolve custos elevados, mas é fundamental para assegurar que essa herança cultural não seja perdida. A prefeitura tem trabalhado em conjunto com organizações locais e o governo federal para viabilizar a recuperação da estrutura.</p>\n\n<p>Hoje, o Casarão da Bela Vista continua a ser um ponto de referência em Araraquara, evocando a memória de um Brasil rural e suas transformações ao longo dos séculos.</p>"
+    },
+    {
+        "title": "Os mistérios da chácara onde Mário de Andrade escrevia",
+        "description": "A Chácara Sapucaia é um sítio histórico e cultural de Araraquara, conhecido por seus túneis subterrâneos e por ser um ponto de referência da cidade com grande importância local.",
+        "image": "static/img/sapucaia.jpg",
+        "content": "<h4>História da Chácara Sapucaia e seus Túneis</h4>\n<p>A Chácara Sapucaia, localizada em Araraquara, é um espaço de grande importância histórica e cultural. Originalmente de propriedade de Pio Lourenço, médico e escritor, a chácara se tornou famosa por ser o local onde o escritor modernista <i>Mário de Andrade</i> escreveu a obra <i>Macunaíma</i>, em 1926. Ele escrevia à noite, dentro da banheira que você vê na imagem acima. O local, com suas paisagens e clima inspirador, desempenhou um papel crucial na literatura brasileira, sendo considerado um marco no modernismo nacional.</p>\n<p>Hoje, a chácara está integrada à <i>Universidade Estadual Paulista (UNESP)</i> e abriga o <i>Centro Cultural Professor Waldemar Saffioti</i>, que promove diversas atividades culturais e exposições ligadas à literatura e à arte. Este centro ajuda a preservar o legado histórico e literário do local, mantendo viva a memória de Mário de Andrade e do modernismo brasileiro.</p>\n<h5>A Importância Literária</h5>\n<p>A Chácara Sapucaia é famosa principalmente por sua relação com o modernismo. Mário de Andrade, um dos principais nomes do movimento, escreveu em suas cartas que a tranquilidade e o ambiente rural da chácara foram fundamentais para o desenvolvimento de sua obra <i>Macunaíma</i>. A obra, considerada um marco na literatura brasileira, tem como característica a mistura de elementos da cultura popular e a criação de uma narrativa única e inovadora.</p>\n<p>O local, imerso na cultura caipira e nas lendas brasileiras, inspirou não apenas a literatura, mas também diversos estudiosos que buscam entender as relações entre a literatura, o ambiente e o contexto histórico-social da época.</p>\n<h5>Os Túneis Misteriosos</h5>\n<p>Além de seu valor literário, a Chácara Sapucaia é envolta em mistérios, com destaque para os túneis subterrâneos que teriam sido construídos no final do século XIX. Estes túneis, cujo propósito inicial ainda não é completamente conhecido, são uma das atrações que despertam a curiosidade de historiadores e turistas.</p>\n<p>Existem teorias que sugerem que os túneis poderiam ter sido usados para fins de transporte clandestino, como uma rota de fuga, ou até mesmo como uma maneira de transportar produtos agrícolas sem serem vistos, especialmente em tempos de agitação política. Outros sugerem que os túneis poderiam ter ligação com a antiga estação ferroviária da cidade, formando uma rede subterrânea de interconexões.</p>\n<p>Embora os túneis não sejam amplamente divulgados como uma atração turística, eles continuam a ser um ponto de interesse para quem visita a Chácara Sapucaia. A presença desses túneis acrescenta uma camada de mistério e atratividade ao local, tornando-o ainda mais fascinante para os que buscam explorar os segredos históricos de Araraquara.</p>\n<h5>O Legado Cultural da Chácara Sapucaia</h5>\n<p>Além da história literária, a Chácara Sapucaia tem um valor cultural profundo para a cidade de Araraquara. Por ser uma das poucas propriedades que sobreviveram ao tempo e às transformações urbanas da cidade, a chácara serve como um elo entre o passado e o presente, permitindo que novas gerações conheçam as raízes históricas e culturais de Araraquara.</p>\n<p>O Centro Cultural que ocupa o espaço hoje promove uma rica programação de eventos, exposições e atividades educativas, com o intuito de manter viva a memória de sua história e expandir o conhecimento sobre o Modernismo Brasileiro.</p>"
+    },
+    {
+        "title": "Do antigo shopping, sobraram apenas ruínas",
+        "description": "Antigo shopping da cidade, agora, infelizmente em ruínas. Vamos conhecer um pouco da história dele!",
+        "image": "static/img/tropical.jpeg",
+        "content": "<h4>História do Tropical Shopping de Araraquara</h4>\n\n<p>O Tropical Shopping foi inaugurado em 1989 e foi o primeiro centro comercial de Araraquara. Considerado um marco para a cidade e para a região, o shopping se tornou um dos pontos de referência de compras e lazer por muitos anos. Durante sua operação, o Tropical Shopping atraiu não só araraquarenses, mas também moradores de cidades vizinhas.</p><br>\n\n<p>No entanto, com o passar do tempo e a mudança no perfil de consumo da população, o movimento nas lojas começou a cair. A partir de 2007, o shopping passou por dificuldades financeiras e o número de visitantes diminuiu consideravelmente. Como resultado, o empreendimento encerrou suas atividades e entrou em um longo período de abandono.</p><br>\n\n<p>A situação do prédio deteriorado gerou muitas preocupações, e desde 2021, a administração municipal iniciou esforços para resolver o problema, incluindo a assunção da posse do imóvel. A área foi oficialmente considerada abandonada e a Prefeitura passou a implementar medidas de segurança, como a instalação de vigilância armada e o fechamento do local com alambrados.</p><br>\n\n<p>Apesar do Tropical Shopping ter encerrado suas atividades, o local ainda é lembrado com carinho por muitos araraquarenses, sendo considerado um símbolo da transformação do comércio local. Hoje, o espaço é alvo de planos da prefeitura para sua revitalização e destinação para um novo uso, com o objetivo de beneficiar a comunidade local.</p>"
+    },
+    {
+        "title": "A história da A.F.E.",
+        "description": "Conheça mais sobre o time de futebol oficial de Araraquara: Associação Ferroviária de Esportes.",
+        "image": "static/img/ferroviaria.jpg",
+        "content": "<h4>Araraquarense também é craque!</h4>\n<p>A <b>Associação Ferroviária de Esportes</b> de Araraquara é um dos clubes de futebol mais tradicionais do interior paulista, fundada no dia 12 de abril de 1950, graças ao apoio da Estrada de Ferro Araraquara, que na época estava em pleno auge. A equipe foi formada com o objetivo de representar a cidade nas competições esportivas, e logo se destacou, com uma trajetória repleta de títulos e momentos históricos. No entanto, seu crescimento foi consolidado também através da construção do Estádio Fonte Luminosa, que teve sua inauguração em 1951, sendo um marco importante para o clube e para a cidade.</p>\n\n<h4>Destaques da trajetória</h4><p>Durante sua trajetória, a Ferroviária viveu muitos altos e baixos, mas sempre se manteve como um símbolo de paixão e união para os araraquarenses. Em 1956, o clube conquistou o seu primeiro título estadual ao vencer o Campeonato Paulista da Segunda Divisão, e nos anos seguintes, viu seus jogadores se destacarem, como Bazani, considerado um dos maiores ídolos da história do clube.</p>\n\n<h4>Reconhecimento cultural</h4><p>Em 2022, a Ferroviária foi reconhecida oficialmente como patrimônio imaterial de Araraquara, destacando-se não apenas pela sua história no futebol, mas também como um ícone cultural da cidade. A decisão também incluiu o tombamento do pórtico do estádio Fonte Luminosa como patrimônio material.</p>\n\n<h4>Preservação histórica</h4><p>Este reconhecimento é uma forma de preservar a memória afetiva e histórica do clube, que ao longo de mais de sete décadas de existência, construiu uma sólida relação com a população de Araraquara, sendo uma referência não apenas no futebol, mas também na identidade cultural da cidade.</p>"
+    },
+    {
+        "title": "Temos dinossauros? Em Araraquara!?",
+        "description": "Descubra a praça Pedro de Toledo, um importante espaço público da cidade, destacando-se por suas pegadas de dinossauros fossilizadas e por ser um local de convivência e lazer para a comunidade.",
+        "image": "static/img/toledo.jpg",
+        "content": "<h4>História da Praça Pedro de Toledo e as Pegadas de Dinossauros</h4>\n\n<p>A Praça Pedro de Toledo, localizada no centro de Araraquara, é um marco histórico e cultural da cidade. Além de ser um espaço de lazer e memória, ela também é conhecida por abrigar pegadas de dinossauros, que datam de aproximadamente 130 milhões de anos, do período Jurássico. Essas pegadas foram preservadas em lajes de arenito da Formação Botucatu, e hoje são visíveis nas calçadas da praça, transformando-a em um museu a céu aberto.</p>\n\n<h5>As Pegadas de Dinossauros</h5>\n<p>As pegadas de dinossauros encontradas na Praça Pedro de Toledo são um importante patrimônio paleontológico. Elas representam vestígios de diferentes espécies de dinossauros que viveram na região há mais de 130 milhões de anos. A presença dessas marcas fósseis fez com que o local fosse reconhecido como um ponto de grande interesse histórico e científico. O governo municipal, por meio de uma legislação, criou leis para proteger esse patrimônio, garantindo a preservação das pegadas para as futuras gerações.</p>\n\n<h5>Conscientização e Educação Pública</h5>\n<p>Para proteger e valorizar esse patrimônio, foram realizadas atividades educativas, como mapeamentos das pegadas e ações de sensibilização junto à população local. A cidade também lançou um mapa atualizado com os locais exatos das pegadas, promovendo um maior envolvimento da comunidade com esse legado. As atividades visam ensinar os moradores sobre a importância da preservação do patrimônio paleontológico, promovendo o entendimento de como essas evidências naturais contribuem para o conhecimento científico sobre a fauna pré-histórica.</p>\n\n<p>A Praça Pedro de Toledo se tornou um ponto turístico e cultural da cidade, atraindo não apenas os moradores de Araraquara, mas também turistas interessados em conhecer as pegadas de dinossauros e aprender mais sobre a história geológica da região. Além disso, as pegadas reforçam a importância de Araraquara como um local de grande valor paleontológico.</p>\n\n<p>Imagens históricas das pegadas de dinossauros e da praça podem ser consultadas em diversas fontes públicas e educativas relacionadas ao patrimônio de Araraquara.</p>"
+    },
+    {
+        "title": "Mais dinossauros!?!?!?",
+        "description": "O Parque Infantil de Araraquara é uma área de lazer histórica, famosa por sua arquitetura charmosa e por ser um importante ponto de convivência e entretenimento na cidade. Vamos conhecer?",
+        "image": "static/img/pqinfantil.jpg",
+        "content": "<h4>História do Parque Infantil de Araraquara</h4>\n\n<p>O <b>Parque Infantil</b>, também conhecido como Praça Major Abel Fortes, é um dos principais pontos de lazer de Araraquara. Localizado no centro da cidade, o parque é um local de recreação popular, muito utilizado por famílias, jovens e idosos para atividades ao ar livre. Com uma pista de caminhada de 800 metros, equipamentos de exercício e áreas arborizadas, o parque oferece um ambiente tranquilo e agradável para os moradores da cidade.</p>\n\n<p>O parque também é famoso por abrigar <i>pegadas de dinossauros fossilizadas</i>, datando de aproximadamente 130 milhões de anos. Estas pegadas, preservadas nas calçadas de arenito da região, são um patrimônio paleontológico único que chama a atenção de estudiosos e turistas. A preservação dessas pegadas é um esforço contínuo da cidade, que busca proteger esse valioso acervo histórico. As calçadas de arenito de Araraquara, especialmente no parque, tornaram-se conhecidas no meio acadêmico como ''calçadas jurássicas''.</p>\n\n<h5>Importância Histórica e Cultural</h5>\n\n<p>O Parque Infantil não é apenas um local de lazer, mas também um símbolo da história de Araraquara. Seu valor vai além das atividades cotidianas, representando um elo entre o passado e o presente da cidade. A presença de pegadas de dinossauros no local é um exemplo notável da rica história geológica da região. Essas pegadas atraem tanto os moradores locais quanto turistas, tornando o parque um ponto de interesse cultural e educacional.</p>\n\n<p>Além disso, o parque é palco de eventos e feiras, como a tradicional Feira de Adoção de Animais, que ocorre periodicamente. O local também é um centro de convivência comunitária, onde os moradores de Araraquara podem desfrutar de um ambiente relaxante e saudável.</p>"
+    }
+]
+
+      var modalOptions = {};
+
+      // Função de inicialização dos modais
+      function initializeModals() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, modalOptions);
+      }
+    
+      async function loadArticles() {
+        console.log(articlesJson);
+    
+        const cardsContainer = document.getElementById('cardsContainer');
+    
+        for (let x = 0; x < articlesJson.length; x++) {
+          var articleNumber = x
+          var articleTitle = articlesJson[x]['title']
+          let articleDescription = articlesJson[x]['description']
+          let articleImage = articlesJson[x]['image']
+          let articleContent = articlesJson[x]['content']
+    
+          let card = `
+            <!-- CARD -->
+            <div class="card">
+              <div class="cardImg"><img class="cardImg" src="${articleImage}" alt="Imagem de capa do artigo.">
+              </div>
+              <div style="padding: 5px; height: fit-content">
+                <p font-family="Poppins"><b>${articleTitle}</b></p>
+                <p font-family="Poppins">${articleDescription}</p>
+              </div>
+              <div style="padding: 5px; height: 100%; display:flex; flex-direction: column; justify-content: flex-end">
+                <div class="waves-effect waves-light btn modal-trigger" data-target="modal${articleNumber}" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
+              </div>
+            </div>
+    
+            <!-- ARTIGO -->
+            <div id="modal${articleNumber}" class="modal">
+              <div class="header">
+                <div class="header-content">
+                  <a href="#!" class="modal-close waves-effect waves-red btn-flat" style="display: flex; flex-direction: row; align-items: center; width: fit-content"><i class="material-icons" style="font-size: 30px">arrow_back</i><p style="margin-left: 15px">Voltar</p></a>
+                </div>
+              </div>
+              <div class="content">
+                  <h3 style="text-align:center">${articleTitle}</h3>
+                  <p style="text-align:center"><b>${articleDescription}</b></p>
+                  <div class="modalImageContainer">
+                    <img src="${articleImage}">
+                  </div>
+                  <div>
+                    ${articleContent}
+                  </div>
+              </div>
+            </div>
+          `
+    
+          const cardsContainer = document.getElementById('cardsContainer');
+    cardsContainer.insertAdjacentHTML('beforeend', card);
+  }
+
+  // Inicializa os modais APÓS adicionar todos os artigos
+  initializeModals();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Carrega os artigos (e inicializa os modais ao final)
+  loadArticles();
+});
+    
+    </script>
+    
+
+  </div>
+
+</section>
+ <section id="sobre" style="background-color:transparent; width:100%; height: 100%; padding:10px">
+  <div>
+    <h1>Quem somos?</h1>
+    <p>
+      Muito bem, hora das apresentações! Nós somos:
+    </p>
+    <div>
+
+      <h2>
+        <u>Felipe Campos Conde</u>
+      </h2>
+      <p>
+        "Tenho 18 anos e sou iniciante em programação, porém não em computação. Minha preferência é por back-end, ainda que front-end também agrade os meus olhos. Utilizo Linux desde os 14 ou 15 anos de idade, e sou amigo do FOSS (Free Open Source Software)."
+      </p>
+      <h2>
+        <u>Vinícius Borges Gouvea</u>
+      </h2>
+      <p>
+        "Olá. Tenho 16 anos e estou estudando programação. Esse é meu primeiro contato na parte de frontend e estou gostando bastante."
+      </p>
+      <h2>
+        <u>Felipe "Mr. Mpedia" Borges Carvalho</u>
+      </h2>
+      <p>
+        "Programador já há um tempo. Mas foco mais em gamedev e coisas com certeza muito úteis para a sociedade."
+      </p>
+      <br>
+    </div>
+    <p>
+      E nós decidimos fazer esse site como nosso projeto porque acreditamos que a divulgação da cultura local é uma ótima forma de contribuir positivamente para a nossa sociedade. É uma pena que muitas pessoas não conheçam todas as coisas legais que o nosso site tem a oferecer.
+    </p>
+  </div>
+  <div id="comofoi">
+<h1>
+  O que aprendemos?
+</h1>
+<p>
+  No fim, este curso ensinou muita coisa para nós. Desde o básico da programação web até outras coisas que nenhum de nós
+  conhecia. Aqui está um pouco do que vimos:
+</p>
+<h2>
+  HTML
+</h2>
+<p>
+  A linguagem de marcação de hipertexto, o <b>HTML</b>, é o mais básico para se saber quando se está criando qualquer
+  coisa para a web. Como é apenas uma forma de explicar para o navegador o que vai em cada lugar, não se pode dizer
+  que é uma linguagem de programação.
+</p>
+<h2>
+  CSS
+</h2>
+<p>
+  A "Folha de Estilos em Cascata" ou "<i>Cascading Style Sheets</i>", o <b>CSS</b>, serve para estilizar os elementos
+  no <b>HTML</b>. Desde mudanças de cor, espaçamento e até rotação, animações e quase tudo mais que se possa imaginar, o <b>CSS</b> é
+  capaz de fazer com os elementos dentro do site.
+</p>
+<h2>
+  JavaScript
+</h2>
+<p>
+  O último membro da trilogia da programação web. Enquanto uma é marcação, outra é estilo, e esta é
+  funcionalidade. <b>JavaScript</b>, ou <b>JS</b> para os mais íntimos, é simplesmente uma linguagem de programação
+  de fato, o que é ótimo. Com <b>JavaScript</b> você pode adicionar funcionalidades ao site além de implementar
+  ainda mais o que já existe.
+</p>
+<h2>
+  PHP
+</h2>
+<p>
+  Antigo "<i>Personal Home Page</i>" e atual "<i>PHP: Hypertext Processor</i>", o <b>PHP</b> é um avô das linguagens usadas na
+  web, estando aí desde 1995 e servindo... bem, basicamente para tudo, mas principalmente para interação com o banco
+  de dados, pois é <i>back-end</i>.
+</p>
+<h2>
+  SQL
+</h2>
+<p>
+  A "Linguagem de Consulta Estruturada" ou "<i>Structured Query Language</i>", o <b>SQL</b> é basicamente a única forma de fazer
+  consultas com bancos de dados. Pelo menos todo mundo usa ela. No fim, é uma das mais fáceis de entender, visto que
+  só a usamos para mexer com o banco de dados.
+</p>
+<h2>
+  React
+</h2>
+<p>
+  Certo, esta é meio que uma trapacinha. <b>React</b> não é exatamente uma linguagem, é mais uma biblioteca de
+  <b>JS</b>. Então faria sentido colocar também na lista coisas como <b>JQuery</b> ou <b>Bootstrap</b>? Talvez, mas
+  não as usamos tanto quanto usamos o <b>React</b>, então não vale a pena colocá-las.
+</p>
+
+  </div>
+</section>
+ 
+<div style="width: 100%; height:75px"></div>
+
+<div style="box-shadow: rgb(0, 0, 0) 6px 6px 3px, rgb(0, 0, 0) 0px 3px 6px; z-index: 500; bottom: 0px; padding: 0; width:100vw; height:75px; display: flex; flex-direction: row; position: fixed; background-color: #f1f1f1; justify-content:space-around">
+    <img class="sponsor" src="static/img/lupo.png"/>
+    <img class="sponsor" src="static/img/think.png"/>
+    <img class="sponsor" src="static/img/ispac.png"/>
+    <img class="sponsor" src="static/img/governo.png"/>
+    <img class="sponsor" src="static/img/rouanet.png"/>
+</div>
+
+
+  </div>
+
+  <!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="static/js/scripts.js"></script>
+<script type="text/javascript" src="static/js/materialize.min.js"></script>
+</body>
+
+</html>

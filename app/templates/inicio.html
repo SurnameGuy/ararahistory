@@ -1,139 +1,5 @@
 {% load static %}
 <section id="inicio" style="background-color:transparent; width:100%; height: 100%; padding:10px">
-  <style>
-    #iframeDiv {
-      position: absolute;
-      width: 540px;
-      height: 640px;
-      overflow: hidden;
-    }
-
-    #iframeDivParent {
-      width: fit-content !important;
-      height: fit-content !important;
-    }
-
-    .mapaDecoracao {
-      border: hidden;
-      border-radius: 15px;
-    }
-
-    #mapa {
-      position: absolute;
-      top: -50px;
-      left: 0;
-      width: 540px;
-      height: 480px;
-    }
-
-    #iframeBar {
-      width: 100%;
-      height: 50px;
-      background-color: blue;
-      position: relative;
-      z-index: 400;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      p {
-        color: white;
-        font-size: 18px;
-        margin-left: 15px
-      }
-
-    }
-
-    .mapaResponsivo {
-      height: 640px;
-      width: 540px;
-      margin-top: 15px
-    }
-
-    #mapaPlaceholder {
-      background-image: url("{% static 'img/map.png' %}");
-      background-size: cover;
-      /* Zoom to fit */
-      background-position: center;
-      /* Center the image */
-      width: 100%;
-      height: 380px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 20px;
-      position: absolute;
-      z-index: 1;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-      opacity: 1;
-      /* Fully visible */
-      transition: opacity 1s ease;
-      /* Transition effect for fading */
-    }
-
-    #mapaPlaceholder.hidden {
-      opacity: 0;
-      /* Hidden state */
-    }
-
-    #mapParagraph {
-      display: flex;
-      flex-direction: row;
-      margin-top: 1.52rem;
-    }
-
-    #divOndeTemODisco {
-      display: flex;
-      flex-direction: row;
-    }
-
-    @media (max-width: 1100px) {
-
-      #mapParagraph,
-      #divOndeTemODisco {
-        flex-direction: column;
-        padding: 0;
-        justify-content: center;
-      }
-
-      .mapaResponsivo {
-        width: 100%;
-      }
-
-      #auau {
-        margin-top: -200px;
-      }
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      50% {
-        transform: rotate(180deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    #disco {
-      height: 100%;
-      cursor: pointer;
-    }
-
-    .rotate {
-      animation: rotate 2s infinite linear;
-    }
-
-    .pause {
-      animation-play-state: paused;
-    }
-  </style>
 
   <div>
     <p><b>Conheça a história da cidade de Araraquara e suas tradições.</b></p>
@@ -159,13 +25,16 @@
       <b>Araraquara</b> é um município localizado no interior do estado de <b>São Paulo</b>, Brasil, a
       aproximadamente 270 km da capital paulista. Segundo estimativas de julho de 2024, sua população é de
       <b>252.318 habitantes</b>, sendo o <b>34º município mais populoso do estado</b>. Fundada em 22 de agosto de
-        1817, Araraquara tem suas origens ligadas aos <b>índios guaianás</b>, primeiros habitantes da região.<br>
+      1817, Araraquara tem suas origens ligadas aos <b>índios guaianás</b>, primeiros habitantes da região.<br>
       <br>Ao longo do século XX, a cidade desenvolveu <b>indústrias</b> e um <b>comércio ativo</b>, além de criar
       escolas, clubes e universidades que contribuíram para seu crescimento.<br><br>
       A economia de Araraquara é diversificada, com destaque para os setores <b>industrial</b>, <b>comercial</b>
       e <b>agrícola</b>. A cidade é conhecida pela produção de <b>cana-de-açúcar</b>, <b>laranja</b> e <b>café</b>. Além
-      disso, abriga empresas de relevância nacional, como a <b>Lupo</b>, uma das maiores fabricantes de roupas íntimas, meias e roupas esportivas do Brasil, reconhecida pela <b>qualidade de seus produtos</b> e pela inovação no <b>setor têxtil</b>, e a <b>Cutrale</b>, na
-      produção e exportação de <b>suco de laranja</b>, consolidando Araraquara como <b>um dos principais polos do setor</b>.
+      disso, abriga empresas de relevância nacional, como a <b>Lupo</b>, uma das maiores fabricantes de roupas íntimas,
+      meias e roupas esportivas do Brasil, reconhecida pela <b>qualidade de seus produtos</b> e pela inovação no
+      <b>setor têxtil</b>, e a <b>Cutrale</b>, na
+      produção e exportação de <b>suco de laranja</b>, consolidando Araraquara como <b>um dos principais polos do
+        setor</b>.
     </p>
     <h4>Achou que acabava por aí?</h4>
     <p><b>O município de Araraquara</b> é formado, além do próprio distrito de <b>Araraquara</b>, pela <b>Vila
@@ -231,15 +100,26 @@
               hoje. Por exemplo, como na obra "Monografia da Palavra Araraquara", escrita por Pio Lourenço Corrêa, que
               indica possíveis falhas no apontamento de Dom Pedro II e estuda outras teorias.</p>
             <br>
-            <p>Mas, de qualquer forma, uma coisa é certa: Araraquara não deixa de ser morada do sol e das araras,
-              independentemente do nome da cidade.</p>
-            <br>
-            <h4></h4>
           </div>
 
         </div>
 
       </div>
+    </div>
+
+
+    <div>
+      <p>Mas, de qualquer forma, uma coisa é certa: Araraquara não deixa de ser morada do sol e das araras,
+        independentemente do nome da cidade.</p>
+      <br>
+      <h4>Mais curiosidades</h4>
+      <p>Eu aposto que você não sabia que <b>Herbert Richers</b> é nascido aqui. Sim, isso mesmo, o finado
+        produtor de cinemas que hoje tem com seu nome o maior estúdio de dublagens do Brasil!</p>
+      <br>
+      <p>E que existe um posto de combustível tematizado com o Batman e com um avião em exposição (Auto Posto
+        Bambina), dentre outros pontos muito legais e interessantes? Sabia disso?</p>
+      <br>
+      <p>Bom, se quer saber mais, recomendo <b>ler os nossos artigos</b>.</p>
     </div>
 
     <div id="mapParagraph">
@@ -278,36 +158,18 @@
           <br>Desde a Igreja Matriz até o Casarão de Bela Vista, nossa cidade é rica de histórias. Podemos não ter
           muitos lugares interessantes para visitar (Além das dezenas de interessantíssimos pontos turísticos que
           temos), mas uma coisa é certa: <b>Cultura definitivamente temos</b>. Não é atoa que somos uma das cidades que
-          são referências no interior do estado de São Paulo.</p>
+          são referências no interior do estado de São Paulo.
+        </p>
       </div>
 
     </div>
 
     <script>
-      const audioControl = document.getElementById('hinoDiv');
-      const audio = document.getElementById('hinoTag');
-      const disco = document.getElementById('disco');
-      disco.classList.add('pause');
 
-      audioControl.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play();
-          disco.classList.remove('pause');
-        } else {
-          audio.pause();
-          disco.classList.add('pause');
-        }
-      });
     </script>
 
     <script>
-      function hidePlaceholder() {
-        const placeholder = document.getElementById('mapaPlaceholder');
-        placeholder.classList.add('hidden'); // Add the hidden class to start fading out
-        setTimeout(() => {
-          placeholder.style.display = 'none'; // Set display to none after the fade-out transition
-        }, 1000); // Match this duration with the CSS transition duration
-      }
+
     </script>
   </div>
 </section>

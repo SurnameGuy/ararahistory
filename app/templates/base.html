@@ -11,12 +11,14 @@
     rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}">
   <title>
     {% block title %}
     Ararahistory
     {% endblock %}
   </title>
   <style>
+    /***** BASE.HTML *****/
     * {
       box-sizing: border-box;
       padding: 0;
@@ -29,7 +31,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      background-color:lightcyan;
+      background-color: lightcyan;
     }
 
     .carousel-item img {
@@ -61,6 +63,325 @@
       font-size: 18px;
       color: rgb(39, 39, 39);
     }
+
+
+    /***** NAVBAR.HTML *****/
+    .tab {
+      width: 100%;
+      height: 100%;
+    }
+
+
+
+    /***** INICIO.HTML *****/
+    #iframeDiv {
+      position: absolute;
+      width: 540px;
+      height: 640px;
+      overflow: hidden;
+    }
+
+    #iframeDivParent {
+      width: fit-content !important;
+      height: fit-content !important;
+    }
+
+    .mapaDecoracao {
+      border: hidden;
+      border-radius: 15px;
+    }
+
+    #mapa {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 540px;
+      height: 480px;
+    }
+
+    #iframeBar {
+      width: 100%;
+      height: 50px;
+      background-color: blue;
+      position: relative;
+      z-index: 400;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      p {
+        color: white;
+        font-size: 18px;
+        margin-left: 15px
+      }
+
+    }
+
+    .mapaResponsivo {
+      height: 640px;
+      width: 540px;
+      margin-top: 15px
+    }
+
+    #mapaPlaceholder {
+      background-image: url("{% static 'img/map.png' %}");
+      background-size: cover;
+      /* Zoom to fit */
+      background-position: center;
+      /* Center the image */
+      width: 100%;
+      height: 380px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 20px;
+      position: absolute;
+      z-index: 1;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      opacity: 1;
+      /* Fully visible */
+      transition: opacity 1s ease;
+      /* Transition effect for fading */
+    }
+
+    #mapaPlaceholder.hidden {
+      opacity: 0;
+      /* Hidden state */
+    }
+
+    #mapParagraph {
+      display: flex;
+      flex-direction: row;
+      margin-top: 1.52rem;
+    }
+
+    #divOndeTemODisco {
+      display: flex;
+      flex-direction: row;
+    }
+
+    #discoContainer {
+      height: fit-content;
+    }
+
+    @media (max-width: 1100px) {
+
+      #mapParagraph,
+      #divOndeTemODisco {
+        flex-direction: column;
+        padding: 0;
+        justify-content: center;
+      }
+
+      .mapaResponsivo {
+        width: 100%;
+      }
+
+      #auau {
+        margin-top: -200px;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #disco {
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .rotate {
+      animation: rotate 2s infinite linear;
+    }
+
+    .pause {
+      animation-play-state: paused;
+    }
+
+
+
+
+    /***** ARTICLES.HTML *****/
+    h5, h4, h3, h2, h1 {
+      font-weight: bold !important;
+      font-style: bold !important;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: calc(100vh - 60px);
+      overflow-y: scroll;
+      top: 60px;
+      position: fixed;
+      width: 100vw;
+      padding-top: 30px;
+      padding-left: 100px;
+      padding-right: 100px;
+      padding-bottom: 30px;
+    }
+
+    .header {
+      height: 60px !important;
+      width: 100%;
+      position: fixed;
+      background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; position: fixed; z-index: 500;
+      z-index: 9999px;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: left;
+      width: 100%;
+      height: 100%;
+    }
+
+    .material-icons {
+      font-family: "Material Icons" !important;
+    }
+
+    .modal p,
+    a {
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    .modal {
+      min-width: 100vw;
+      min-height: 100vh;
+      top: 0 !important;
+    }
+
+    .modalImageContainer img {
+      width: fit-content;
+      height: max-content;
+      height: 700px;
+      object-fit: contain;
+      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .modalImageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: fit-content;
+      border-radius: 5px;
+      margin-bottom: 40px;
+    }
+
+    .cardImg {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .card {
+      filter: brightness(100%);
+      transition: filter 0.1s ease-in-out;
+      border-radius: 10px;
+      display: inline-grid;
+      background-color: #f9f9f9;
+    }
+
+    .card:hover {
+      filter: brightness(90%);
+      transition: filter 0.1s ease-in-out;
+    }
+
+    #cardsContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      /* Responsive columns */
+      column-gap: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 800px) {
+      .content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }    
+
+    @media (min-width: 1200px) {
+
+      #cardsContainer {
+
+        grid-template-columns: repeat(4, 1fr);
+        /* Four columns on large screens */
+
+      }
+
+    }
+
+    @media (max-width: 800px) {
+      #cardsContainer {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        /* Fewer columns for smaller screens */
+      }
+    }
+
+    @media (max-width: 500px) {
+      #cardsContainer {
+        grid-template-columns: 1fr;
+        /* Single column for very small screens */
+      }
+    }
+
+
+
+
+
+    /***** ABOUT.HTML *****/
+
+    #comofoi,
+    p {
+      text-align: justify;
+    }
+
+    #oq {
+      text-align: justify;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 25px;
+    }
+
+
+    /***** FOOTER.HTML *****/
+    .sponsor {
+        object-fit: contain;
+        max-width: 80px;
+    }
   </style>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -82,7 +403,6 @@
   </div>
 
   <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
 </body>
 

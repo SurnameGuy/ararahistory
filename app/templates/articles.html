@@ -1,5 +1,5 @@
 {% load static %}
-<section id="artigos" style="background-color:#eaff8d; width:100%; height: 100%; padding:10px">
+<section id="artigos" style="background-color:transparent; width:100%; height: 100%; padding:10px">
   <style>
     h5, h4, h3, h2, h1 {
       font-weight: bold !important;
@@ -140,79 +140,82 @@
     }
   </style>
   <div id="cardsContainer">
-
     <script src="{% static 'js/japescript.js' %}"></script>
     <script>
+      var modalOptions = {};
+    
+      // Função de inicialização dos modais
+      function initializeModals() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, modalOptions);
+      }
+    
       async function loadArticles() {
         const response = await fetch("{% static 'db/articles.json' %}");
         const articlesJson = await response.json();
         console.log(articlesJson);
-
+    
         const cardsContainer = document.getElementById('cardsContainer');
-
-        for (x = 0; x < articlesJson.length; x++) {
+    
+        for (let x = 0; x < articlesJson.length; x++) {
           var articleNumber = x
           var articleTitle = articlesJson[x]['title']
           let articleDescription = articlesJson[x]['description']
           let articleImage = articlesJson[x]['image']
           let articleContent = articlesJson[x]['content']
-
+    
           let card = `
-          <!-- CARD -->
-          <div class="card">
-            <div class="cardImg"><img class="cardImg" src="${articleImage}" alt="A história da Lupo">
-            </div>
-            <div style="padding: 5px">
-              <p font-family="Poppins"><b>${articleTitle}</b></p>
-              <p font-family="Poppins">${articleDescription}</p>
-            </div>
-            </p>
-            <div style="padding: 5px">
-              <div class="waves-effect waves-light btn modal-trigger" data-target="modal${articleNumber}" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
-            </div>
-          </div>
-
-          <!-- ARTIGO -->
-          <div id="modal${articleNumber}" class="modal">
-            <div class="header">
-              <div class="header-content">
-                <a href="#!" class="modal-close waves-effect waves-red btn-flat" style="display: flex; flex-direction: row; align-items: center; width: fit-content"><i class="material-icons" style="font-size: 30px">arrow_back</i><p style="margin-left: 15px">Voltar</p></a>
+            <!-- CARD -->
+            <div class="card">
+              <div class="cardImg"><img class="cardImg" src="${articleImage}" alt="Imagem de capa do artigo.">
               </div>
-            <div class="content">
-                <h3>${articleTitle}</h3>
-                <p><b>${articleDescription}</b></p>
-                <div class="modalImageContainer">
-                  <img src="${articleImage}">
-                </div>
-                <div>
-                  ${articleContent}
-                </div>
+              <div style="padding: 5px; height: fit-content">
+                <p font-family="Poppins" style="text-align:center !important"><b>${articleTitle}</b></p>
+                <p font-family="Poppins" style="text-align:center !important">${articleDescription}</p>
+              </div>
+              <div style="padding: 5px; height: 100%; display:flex; flex-direction: column; justify-content: flex-end">
+                <div class="waves-effect waves-light btn modal-trigger" data-target="modal${articleNumber}" style="background-color: #1565c0; width: 100%">LER ARTIGO</div>
+              </div>
             </div>
-          </div>
-        `
-
+    
+            <!-- ARTIGO -->
+            <div id="modal${articleNumber}" class="modal">
+              <div class="header">
+                <div class="header-content">
+                  <a href="#!" class="modal-close waves-effect waves-red btn-flat" style="display: flex; flex-direction: row; align-items: center; width: fit-content"><i class="material-icons" style="font-size: 30px">arrow_back</i><p style="margin-left: 15px">Voltar</p></a>
+                </div>
+              </div>
+              <div class="content">
+                  <h3>${articleTitle}</h3>
+                  <p><b>${articleDescription}</b></p>
+                  <div class="modalImageContainer">
+                    <img src="${articleImage}">
+                  </div>
+                  <div>
+                    ${articleContent}
+                  </div>
+              </div>
+            </div>
+          `
+    
           const cardsContainer = document.getElementById('cardsContainer');
           cardsContainer.insertAdjacentHTML('beforeend', card);
-
-          initializeModals();
-        };
-
-        var modalOptions = {
-        };
-
-        function initializeModals() {
-          var elems = document.querySelectorAll('.modal');
-          var instances = M.Modal.init(elems, modalOptions);
-        };
+        }
+    
+        // Inicializa os modais após adicionar todos os artigos
+        initializeModals();
       };
-
+    
+      // Chama a função para carregar os artigos
       loadArticles();
-
+    
       document.addEventListener('DOMContentLoaded', function () {
+        // Inicializa os modais ao carregar a página
         initializeModals();
       });
-
+    
     </script>
+    
 
   </div>
 

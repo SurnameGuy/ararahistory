@@ -1,5 +1,5 @@
 {% load static %}
-<section id="inicio" style="background-color:#eaff8d; width:100%; height: 100%; padding:10px">
+<section id="inicio" style="background-color:transparent; width:100%; height: 100%; padding:10px">
   <style>
     #iframeDiv {
       position: absolute;
@@ -81,23 +81,60 @@
     #mapParagraph {
       display: flex;
       flex-direction: row;
+      margin-top: 1.52rem;
     }
 
-    @media (max-width: 1100px){
-      #mapParagraph{
+    #divOndeTemODisco {
+      display: flex;
+      flex-direction: row;
+    }
+
+    @media (max-width: 1100px) {
+
+      #mapParagraph,
+      #divOndeTemODisco {
         flex-direction: column;
-        padding:0;
+        padding: 0;
         justify-content: center;
       }
-      .mapaResponsivo{
+
+      .mapaResponsivo {
         width: 100%;
       }
-      #auau{
+
+      #auau {
         margin-top: -200px;
       }
     }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    #disco {
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .rotate {
+      animation: rotate 2s infinite linear;
+    }
+
+    .pause {
+      animation-play-state: paused;
+    }
   </style>
-  
+
   <div>
     <p><b>Conheça a história da cidade de Araraquara e suas tradições.</b></p>
     {% include "carroussel.html" %}
@@ -111,8 +148,99 @@
       buscamos reunir relatos, memórias e informações sobre as diversas <b>manifestações culturais</b> da nossa cidade,
       desde as festas religiosas e folclóricas até as lendas urbanas e ditados populares. É um espaço onde <b>passado e
         presente se encontram</b>, trazendo à tona a alma de Araraquara e oferecendo às novas gerações um contato
-      genuíno com a nossa essência cultural.
+      genuíno com a nossa essência cultural.<br>
+      <br>Por fim, <b>nosso objetivo é oferecer um espaço onde todos possam se aprofundar</b> no que Araraquara tem de
+      melhor, seja conhecendo nossos pontos turísticos ou simplesmente conhecendo as lendas e tradições que definem a
+      alma de nossa cidade. Sinta-se em casa e fique à vontade para <b>explorar tudo o que preparamos com tanto carinho
+        para você</b>!
     </p>
+    <h4>Sobre nossa "pequena" cidade</h4>
+    <p>
+      <b>Araraquara</b> é um município localizado no interior do estado de <b>São Paulo</b>, Brasil, a
+      aproximadamente 270 km da capital paulista. Segundo estimativas de julho de 2024, sua população é de
+      <b>252.318 habitantes</b>, sendo o <b>34º município mais populoso do estado</b>. Fundada em 22 de agosto de
+        1817, Araraquara tem suas origens ligadas aos <b>índios guaianás</b>, primeiros habitantes da região.<br>
+      <br>Ao longo do século XX, a cidade desenvolveu <b>indústrias</b> e um <b>comércio ativo</b>, além de criar
+      escolas, clubes e universidades que contribuíram para seu crescimento.<br><br>
+      A economia de Araraquara é diversificada, com destaque para os setores <b>industrial</b>, <b>comercial</b>
+      e <b>agrícola</b>. A cidade é conhecida pela produção de <b>cana-de-açúcar</b>, <b>laranja</b> e <b>café</b>. Além
+      disso, abriga empresas de relevância nacional, como a <b>Lupo</b>, uma das maiores fabricantes de roupas íntimas, meias e roupas esportivas do Brasil, reconhecida pela <b>qualidade de seus produtos</b> e pela inovação no <b>setor têxtil</b>, e a <b>Cutrale</b>, na
+      produção e exportação de <b>suco de laranja</b>, consolidando Araraquara como <b>um dos principais polos do setor</b>.
+    </p>
+    <h4>Achou que acabava por aí?</h4>
+    <p><b>O município de Araraquara</b> é formado, além do próprio distrito de <b>Araraquara</b>, pela <b>Vila
+        Xavier</b> (Sim, ela é considerada um distrito) e <b>Bueno de Andrada</b> (Sim, isso mesmo!). Ah, as <b>Coxinhas
+        Douradas</b>! Todo mundo conhece, inclusive as <b>Coxinhas da Dona Nita</b> (Que, segundo boatos, é quem
+      elaborou a receita original das <b>Coxinhas Douradas</b>, porém carece de fontes). As <b>coxinhas de Bueno</b> -
+      em outras palavras, dessa pequena região que também faz parte de <b>Araraquara</b> - são deliciosas, e não há quem
+      discorde!<br><br><b>Calma que tem mais!</b> Também somos formados pelo <b>Assentamento Bela Vista</b>,
+      <b>Assentamento Monte Alegre</b> e <b>Horto de Bueno</b>. Aliás, você sabia que em <b>1833</b>, éramos formados
+      pelos distritos de <b>São Bento de Araraquara</b>, <b>Rincão</b> e <b>Santa Luzia</b>? É, meu caro amigo, aposto
+      que você não sabia de muita coisa que eu te contei agora.
+    </p>
+    <h4>Também temos habilidades no futebol</h4>
+    <p>Araraquara possui uma rica história no futebol, com clubes que marcaram diferentes épocas. Atualmente, o
+      principal representante da cidade é a <b>Associação Ferroviária de Esportes</b>, conhecida como Ferroviária.
+      Fundada em 12 de abril de 1950 por funcionários da antiga Estrada de Ferro Araraquara, a Ferroviária consolidou-se
+      como um dos clubes mais tradicionais do interior paulista. Suas cores são o grená e o branco, e o time manda seus
+      jogos na Arena da Fonte Luminosa, com capacidade para 20.000 espectadores. Ao longo de sua trajetória, a
+      Ferroviária revelou diversos talentos para o futebol brasileiro e participou de competições importantes, como a
+      Série A do Campeonato Brasileiro e a Copa do Brasil.</p>
+
+    <div id="resto">
+      <div>
+        <h4>A Morada do Sol... Ou não?</h4>
+        <p>Muitas pessoas se perguntam o motivo do nome da nossa cidade ser esse. Alguns dizem ser uma tradução em
+          Tupi-Guarani para "<b>Toca das Araras</b>", já outras pessoas acreditam ser "<b>Toca do Sol</b>". A verdadeira
+          origem do
+          nome, no entanto, está ligada a um episódio histórico curioso.
+          <br><br>
+          Mas antes de continuarmos, por que não toca o
+          belíssimo <b>hino da nossa cidade</b>? Temos aqui uma versão bem antiga, a original. <b>Basta clicar no disco
+            abaixo, localizado no lado esquerdo da tela, para ouvi-lo.</b>
+        </p>
+
+
+        <div id="divOndeTemODisco">
+
+          <div id="discoContainer">
+            <audio id="hinoTag" style="visibility: hidden;" controls>
+              <source src="{% static 'audio/hinoaqa.webm' %}" type="audio/webm">
+              <b>Caro usuário, detectamos que o seu navegador não suporta o elemento de áudio. Por este motivo,
+                ficaremos
+                te
+                devendo essa.</b>
+            </audio>
+            <div id="hinoDiv" style="width:15rem; height:15rem">
+              <img src="{% static 'img/disco.png' %}" id="disco" class="rotate">
+            </div>
+          </div>
+
+          <div id="divTextoDoLadoDoDisco">
+            <br>
+            <p>Dom Pedro II visitou Araraquara na inauguração do tráfego provisório da ferrovia na cidade, no dia 6 de
+              novembro de 1886. Quando desembarcou, questionou aos seus infitriões o significado ou origem do nome da
+              cidade. As autoridades locais, então, defenderam a teoria de que o nome significava “Terra das Araras”, em
+              razão da grande quantidade de aves da espécie que habitavam a região.</p>
+            <br>
+            <p>O imperador, porém, com seu vasto conhecimento por ser um ferrenho pesquisador e conhecedor do Tupi,
+              corrigiu as autoridades locais e explicou o verdadeiro significado da palavra, mostrando os estudos do
+              tupinólogo e criador da gramática Tupi, Padre José Anchieta.</p>
+            <br>
+            <p>O verdadeiro significado seria então "Morada do Sol", ainda que existam debates sobre isso até os dias de
+              hoje. Por exemplo, como na obra "Monografia da Palavra Araraquara", escrita por Pio Lourenço Corrêa, que
+              indica possíveis falhas no apontamento de Dom Pedro II e estuda outras teorias.</p>
+            <br>
+            <p>Mas, de qualquer forma, uma coisa é certa: Araraquara não deixa de ser morada do sol e das araras,
+              independentemente do nome da cidade.</p>
+            <br>
+            <h4></h4>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
 
     <div id="mapParagraph">
 
@@ -130,7 +258,7 @@
       </div>
 
       <div id="auau">
-        <h4 style="margin-left: 15px">A morada do sol</h4>
+        <h4 style="margin-left: 15px">Pontos turísticos</h4>
         <p style="margin-top: 15px; margin-left: 15px;"><b>À esquerda</b>, você terá <b>acesso às localizações dos
             pontos
             turísticos</b> e às <b>áreas mais interessantes</b> da nossa querida cidade. Fique à vontade para navegar e
@@ -146,11 +274,31 @@
           <br>
           Do que adianta, afinal, falar dos <b>Campos de Aracoara</b>, nossa querida <b>toca do sol</b>, se não podemos
           conhecer pessoalmente os lugares mais
-          interessantes dela?
-        </p>
+          interessantes dela?<br>
+          <br>Desde a Igreja Matriz até o Casarão de Bela Vista, nossa cidade é rica de histórias. Podemos não ter
+          muitos lugares interessantes para visitar (Além das dezenas de interessantíssimos pontos turísticos que
+          temos), mas uma coisa é certa: <b>Cultura definitivamente temos</b>. Não é atoa que somos uma das cidades que
+          são referências no interior do estado de São Paulo.</p>
       </div>
 
     </div>
+
+    <script>
+      const audioControl = document.getElementById('hinoDiv');
+      const audio = document.getElementById('hinoTag');
+      const disco = document.getElementById('disco');
+      disco.classList.add('pause');
+
+      audioControl.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          disco.classList.remove('pause');
+        } else {
+          audio.pause();
+          disco.classList.add('pause');
+        }
+      });
+    </script>
 
     <script>
       function hidePlaceholder() {
@@ -161,4 +309,5 @@
         }, 1000); // Match this duration with the CSS transition duration
       }
     </script>
+  </div>
 </section>

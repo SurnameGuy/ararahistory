@@ -2,58 +2,58 @@
 <div class="MuiBox-root css-zrayqo">
     <div class="MuiBox-root css-1538kr" style="color: white;"></div>
     <div class="carousel">
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
-          <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa1.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa2.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa3.jpe' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa4.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa5.jpg' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa6.webp' %}"></div>
+        <div class="carousel-item"><img class="imagemScrollavel" src="{% static 'img/aqa7.jpg' %}"></div>
     </div>
 
 
     <script>
-      var carrouselOptions = {
+        var carrouselOptions = {
 
-fullWidth: true,
+            fullWidth: true,
 
-indicators: false,
+            indicators: false,
 
-duration: 200,
+            duration: 200,
 
-numVisible: 30,
+            numVisible: 30,
 
-padding: 10
+            padding: 10
 
-};
-        document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.carousel');
-    var instances = M.Carousel.init(elems, carrouselOptions);
-    
-  function updateCarousel() {
-      var instance = M.Carousel.getInstance(elems[0]);
-      if (instance) {
-          instance.next();
-      }
-  }
-    setInterval(updateCarousel, 2500);
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.carousel');
+            var instances = M.Carousel.init(elems, carrouselOptions);
+
+            function updateCarousel() {
+                var instance = M.Carousel.getInstance(elems[0]);
+                if (instance) {
+                    instance.next();
+                }
+            }
+            setInterval(updateCarousel, 2500);
 
 
-});
+        });
 
     </script>
- </div>
+</div>

@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // INICIO.HTML
 
+
 function hidePlaceholder() {
     const placeholder = document.getElementById('mapaPlaceholder');
     if (placeholder) {
@@ -105,8 +106,18 @@ function forceHidePlaceholder() {
 }
 
 // Adiciona um timeout de 10 segundos para forçar a remoção do placeholder
-setTimeout(forceHidePlaceholder, 7000);
 
+// Certifique-se de que as funções estejam carregadas antes de chamá-las
+window.onload = function () {
+    // Adiciona um timeout de 7 segundos para forçar a remoção do placeholder
+    setTimeout(forceHidePlaceholder, 7000);
+
+    // O código do loading screen
+    document.getElementById('loadingScreen').style.opacity = '0';
+    setTimeout(function () {
+        document.getElementById('loadingScreen').style.display = 'none'; // Esconde a tela de carregamento
+    }, 1000); // O tempo (em ms) deve combinar com a duração da transição (1s)
+};
 
 const audioControl = document.getElementById('hinoDiv');
 const audio = document.getElementById('hinoTag');

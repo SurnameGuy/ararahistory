@@ -1,84 +1,88 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {% block title %}
-        Ararahistory
-      {% endblock %}
-    </title>
-    <style>
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: "Poppins",sans-serif !important;
-}
 
-body {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  cursor: url('https://res.cloudinary.com/dvkugaw3b/image/upload/v1641562028/cursor_ad12rf.png'), auto !important;
-}
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}" media="screen,projection" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    {% block title %}
+    Ararahistory
+    {% endblock %}
+  </title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: "Poppins", sans-serif !important;
+    }
 
-.carousel-item img {
-  size: auto;
-  margin-right: 5px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.459);
-  display: block;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-.btn {
-  border-radius: 5px;
-}
+    .carousel-item img {
+      size: auto;
+      margin-right: 5px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.459);
+      display: block;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
 
-.card {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  background-color: white;
-}
+    .btn {
+      border-radius: 5px;
+    }
 
-.carousel {
-  height: 200px;
-  overflow: hidden;
-}
+    .card {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      background-color: white;
+    }
 
-p {
-  font-size: 18px;
-  color: rgb(39, 39, 39);
-}
-    </style>
+    .carousel {
+      height: 200px;
+      overflow: hidden;
+    }
 
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    p {
+      font-size: 18px;
+      color: rgb(39, 39, 39);
+    }
+  </style>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      <!--JavaScript at end of body for optimized loading-->
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    
-    </head>
-    <body>
-      
-    <div style="flex: 1; display: flex; flex-direction: column; width: 100%;">
-      {% block content %}
-        <!-- Conteúdo das páginas -->
-      {% endblock %}
-    </div>
+  <!--JavaScript at end of body for optimized loading-->
 
-          <!--JavaScript at end of body for optimized loading-->
-          <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
-  </body>
+</head>
+
+<body>
+
+  <div style="flex: 1; display: flex; flex-direction: column; width: 100%;">
+    {% block content %}
+    <!-- Conteúdo das páginas -->
+    {% endblock %}
+  </div>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+
+</body>
+
 </html>
